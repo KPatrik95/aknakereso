@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "start": "node src/generateMinefield.js",
+    "test": "mocha"
+
+  }
+}
