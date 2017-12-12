@@ -1,9 +1,10 @@
 function calculateNeighbourhood(m){
     var result = [];
-
-    for(var i=0; i < m.length; i++){
+    var oszlopsz = m.length;
+    var sorsz = m[0].length;
+    for(var i=0; i < oszlopsz; i++){
         result[i] = [];
-        for(var j=0; j < m.length; j++){
+        for(var j=0; j < sorsz; j++){
             var oszlop = i;
             var sor = j;
             var table = countMine(oszlop, sor, m);
