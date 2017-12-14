@@ -1,18 +1,20 @@
 function exploreCell(mineField,visibleField,x,y) {
     if(visibleField[x][y] === true){
-        console.log("already-explored");
+        //console.log("already-explored");
         return "already-explored";
     }
     else if(mineField[x][y]=== -1){
-        console.log("bomb-found");
+        //console.log("bomb-found");
         return "bomb-found";
     }
-    else if(mineField[x][y]=== 0){
-        console.log("explored");
-        exploreCellNeighbourhood(mineField, visibleField, x, y);
+    else {
+        //console.log("explored");
+        visibleField[x][y] = true;
+        if(mineField[x][y]=== 0) exploreCellNeighbourhood(mineField, visibleField, x, y);
         return "explored";
     }
 }
+
 exports.exploreCell = exploreCell;
 
 
@@ -23,13 +25,13 @@ function exploreCellNeighbourhood(mineField, visibleField, x, y) {
 
     for (var xoff = -1; xoff <= 1; xoff++) {
         for (var yoff = -1; yoff <= 1; yoff++) {
-            var i = oszlopsz + xoff;
-            var j = sorsz + yoff;
-            if (i > -1 && i < oszlopsz && j > -1 && j < sorsz && mineField[i][j] !== -1) {
-
-                visibleField[i][j]= true
-                console.log(i);
-                console.log(j);
+            var i = x + xoff;
+            var j = y + yoff;
+            // console.log("i= "+i);
+            // console.log("j= "+j);
+            if (i > -1 && i < oszlopsz && j > -1 && j < sorsz && mineField[x][y] !== -1) {
+                // console.log("i2= "+i);
+                // console.log("j2= "+j);
                 exploreCell(mineField,visibleField,i,j);
             }
         }
@@ -58,4 +60,5 @@ var x = 2;
 var y = 2;
 
 
-console.log(exploreCellNeighbourhood(mineField,visibleField,x,y));
+exploreCell(mineField,visibleField,x,y);
+console.log(visibleField);

@@ -1,26 +1,25 @@
-function generateMinefield(size,mineCount) {
-    var m = [];
+function generateMinefield(row, column,mineCount) {
+    var mineField = [];
     //console.log(m);
-    for(var k=0; k<size;k++){
-        m[k] = [];
+    for(var k=0; k<row;k++){
+        mineField[k] = [];
         //console.log(m);
-        for(var l=0; l<size;l++){
-            m[k][l] = 0;
+        for(var l=0; l<column;l++){
+            mineField[k][l] = 0;
             //console.log(m)
         }
     }
     for(var mine=0;mine<mineCount;mine++){
-        var i = Math.floor(Math.random()*size);
-        var j = Math.floor(Math.random()*size);
-        while(m[i][j] == -1){
-            i = Math.floor(Math.random()*size);
-            j = Math.floor(Math.random()*size);
+        var i = Math.floor(Math.random()*row);
+        var j = Math.floor(Math.random()*column);
+        while(mineField[i][j] == -1){
+            i = Math.floor(Math.random()*row);
+            j = Math.floor(Math.random()*column);
         }
-        m[i][j] =-1;
+        mineField[i][j] =-1;
     }
 
     //console.log(m)
-    return m;
+    return mineField;
 }
 exports.generateMinefield = generateMinefield;
-generateMinefield(4,6);

@@ -1,0 +1,28 @@
+.Cell {
+    border: solid 1px black;
+    padding: 10px;
+    background-color: grey;
+    text-align: center;
+    width: 25px;
+}
+.BOMB{
+    border: solid 1px black;
+    padding: 10px;
+    background-color: red;
+    text-align: center;
+    width: 25px;
+}
+.Value{
+    border: solid 1px black;
+    padding: 10px;
+    background-color: springgreen;
+    text-align: center;
+    width: 25px;
+}
+.Empty{
+    border: solid 1px black;
+    padding: 10px;
+    background-color: lightgray;
+    text-align: center;
+    width: 25px;
+}

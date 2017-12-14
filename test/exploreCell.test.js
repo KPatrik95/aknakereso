@@ -93,15 +93,15 @@ describe("állapot vizsgálat", function () {
         var result = eCnh(mineField,visibleField,x,y);
 
         var returnVisibleField = [
-            [false, false, true, false, false],
+            [false, false, false, false, false],
             [false, true,  true,  true,  true],
             [false, true,  true,  true,  true],
-            [ true, true,  true,  true,  true],
+            [ false, true,  true,  true,  true],
             [false, false, false, true,  true]
         ];
-        console.log("bevitel: "+visibleField);
-        console.log("elvárt kijövő: "+returnVisibleField);
-        console.log("tényleges kijövő: "+result);
+        // console.log("bevitel: "+visibleField);
+        // console.log("elvárt kijövő: "+returnVisibleField);
+        // console.log("tényleges kijövő: "+result);
         expect(returnVisibleField).deep.equal(result);
     });
 
