@@ -4,7 +4,7 @@ function isAnyNonBombFieldStillHidden(mineField, visibleField) {
     for(var i=0; i < oszlopsz; i++) {
         for (var j = 0; j < sorsz; j++) {
             if(mineField[i][j]===-1 && visibleField[i][j]===true){
-                return 0;
+                return  false;
             }
         }
     }

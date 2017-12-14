@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "node src/generateMinefield.js",
+    "start": "node src/exploreCell.js",
     "test": "mocha"
   },
   "dependencies": {

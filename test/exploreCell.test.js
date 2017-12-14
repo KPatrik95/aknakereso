@@ -63,23 +63,47 @@ describe("állapot vizsgálat", function () {
 
         expect(result).equal(kimenet);
     });
-    it("már felfedve D", function () {
-        var matrix = [
-            [-1,   0, 0],
-            [0 , -1, 0],
-            [-1,  -1, 0]
+
+
+
+
+    var fvek = require('../src/exploreCell.js');
+    var eCnh = fvek.exploreCellNeighbourhood;
+
+    //konkrét teszt eset
+    it("Szomszédmezők felfedése", function () {
+
+        var mineField = [
+            [-1, -1,  2, -1, -1],
+            [-1,  4,  2,  2,  2],
+            [-1,  2,  0,  0,  0],
+            [ 3,  3,  2,  1,  0],
+            [-1, -1, -1,  1,  0]
         ];
         var visibleField = [
-            [false,false,false],
-            [true,false,false],
-            [false,false,false]
+            [false,false,false,false,false],
+            [false,false,false,false,false],
+            [false,false,false,false,false],
+            [false,false,false,false,false],
+            [false,false,false,false,false]
         ];
-        var x = 0;
-        var y = 1;
-        var result = vizsgal(matrix,visibleField,x,y);
+        var x = 2;
+        var y = 2;
 
-        var kimenet = "explored";
+        var result = eCnh(mineField,visibleField,x,y);
 
-        expect(result).equal(kimenet);
+        var returnVisibleField = [
+            [false, false, true, false, false],
+            [false, true,  true,  true,  true],
+            [false, true,  true,  true,  true],
+            [ true, true,  true,  true,  true],
+            [false, false, false, true,  true]
+        ];
+        console.log("bevitel: "+visibleField);
+        console.log("elvárt kijövő: "+returnVisibleField);
+        console.log("tényleges kijövő: "+result);
+        expect(returnVisibleField).deep.equal(result);
     });
+
+
 });

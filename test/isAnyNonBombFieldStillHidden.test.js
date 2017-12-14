@@ -33,7 +33,7 @@ describe('bombákállapota', function(){
             [false,true,true]
         ];
         var result = hiddenBomb(mineField,visibleField);
-        var want = 0;
+        var want = false;
         expect(want).equal(result);
     });
 });
