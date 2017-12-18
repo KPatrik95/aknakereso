@@ -15,7 +15,7 @@ function guiInitialise(width,height,mines) {
         {
             var td = document.createElement("td");
             tr.appendChild(td);
-            td.innerHTML = i+":"+j;
+            //td.innerHTML = i+":"+j;
             td.classList.add("Cell");
 
             matrix[i].push(td);
@@ -23,8 +23,9 @@ function guiInitialise(width,height,mines) {
             var fn = function (i2, j2) {
                 td.onclick = function() {
                     console.log("Rákattintottál a ["+i2+":"+j2+"] mezőre.");
-                    guiUpdateCell(i2,j2,0,mineField,matrix);
                     exploreCell(mineField,visibleField,i2,j2);
+                    guiUpdateCell(mineField,matrix,visibleField,i2,j2);
+                    console.log(visibleField);
                 }
             };
 
@@ -34,33 +35,28 @@ function guiInitialise(width,height,mines) {
 }
 
 
-function guiUpdateCell(x, y, value, mineField,matrix) {
+function guiUpdateCell(mineField, matrix, visibleField,x, y) {
 
-
-
-    if(mineField[x][y] === value) {
-        matrix[x][y].innerHTML = "0";
+    if(mineField[x][y] === 0 || visibleField[x][y]===true) {
+        matrix[x][y].innerHTML = "";
+        matrix[x][y].classList.remove("Cell");
         matrix[x][y].classList.add("Empty");
     } else if (mineField[x][y] === -1) {
         matrix[x][y].innerHTML = "B";
+        //console.log(visibleField);
+        matrix[x][y].classList.remove("Cell");
         matrix[x][y].classList.add("BOMB");
+        alert("You lost! Try Again!");
     } else {
         matrix[x][y].innerHTML = mineField[x][y];
+        matrix[x][y].classList.remove("Cell");
         matrix[x][y].classList.add("Value");
-    }
-
-    if(td.classList.contains("exploredCell")){
-        (td.classList.remove("exploredCell"));
-    } else{
-        td.classList.add("exploredCell");
     }
 }
 
+
 function mineFieldInitialiser(width, height, mines) {
-
-
     var visibleField = [];
-
     var mineField = generateMinefield(width,height, mines);
 
     for (var i = 0; i < width; i++) {
@@ -75,8 +71,6 @@ function mineFieldInitialiser(width, height, mines) {
     return mineField;
 }
 function visibleFieldInitialiser(width, height) {
-
-
     var visibleField = [];
 
     for (var i = 0; i < width; i++) {
@@ -88,7 +82,6 @@ function visibleFieldInitialiser(width, height) {
 
     return visibleField;
 }
-
 
 function generateMinefield(row, column,mineCount) {
     var mineField = [];
@@ -152,7 +145,7 @@ function countMine(oszlop, sor, mineField) {
 
 function exploreCell(mineField,visibleField,x,y) {
     if(visibleField[x][y] === true){
-        //console.log("already-explored");
+        console.log("already-explored");
         return "already-explored";
     }
     else if(mineField[x][y]=== -1){
@@ -162,7 +155,9 @@ function exploreCell(mineField,visibleField,x,y) {
     else {
         //console.log("explored");
         visibleField[x][y] = true;
-        if(mineField[x][y]=== 0) exploreCellNeighbourhood(mineField, visibleField, x, y);
+        if(mineField[x][y]=== 0){
+            exploreCellNeighbourhood(mineField, visibleField, x, y);
+        }
         return "explored";
     }
 }
